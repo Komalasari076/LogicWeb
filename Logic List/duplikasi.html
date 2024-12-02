@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <title>Hapus Elemen Duplikat</title>
+  </head>
+  <body>
+    <div class="logic-list">
+      <h1>Hapus Elemen Duplikat</h1>
+      <p>
+        Hapus elemen yang sama dalam daftar dengan mudah. Cukup masukkan angka
+        atau huruf di kolom input, klik tombol, dan hasilnya akan langsung
+        ditampilkan.
+      </p>
+      <ol>
+        <li>masukan angka atau huruf di kolom input</li>
+        <li>klik Hapus Duplikat</li>
+        <li>Hasil akan muncul dalam bentuk nontifikasi(alert)</li>
+      </ol>
+
+      <form action="">
+        <label for="array">Masukan angka atau huruf</label>
+        <input
+          type="text"
+          name="array"
+          id="array"
+          placeholder="contoh: Nomor 1234531123"
+        />
+
+        <button type="button" onclick="hapusDuplikat(event)">
+          Hapus Duplikat
+        </button>
+      </form>
+    </div>
+
+    <script>
+      function hapusDuplikat(e) {
+        e.preventDefault();
+        let arr = document.getElementById("array").value;
+        const arrBaru = [];
+
+        for (i = 0; i < arr.length; i++) {
+          if (!arrBaru.includes(arr[i])) {
+            arrBaru.push(arr[i]);
+          }
+        }
+
+        return alert(arrBaru);
+      }
+    </script>
+  </body>
+</html>
