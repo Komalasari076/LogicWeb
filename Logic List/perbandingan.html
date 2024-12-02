@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <title>Perbandingan Array</title>
+  </head>
+  <body>
+    <div class="same-array">
+      <h1>Perbandingan Array</h1>
+      <p>
+        Masukkan dua array untuk dibandingkan. Aplikasi ini akan memeriksa
+        apakah kedua array memiliki panjang yang sama dan elemen yang sama.
+        Hasil perbandingan akan ditampilkan di konsol browser.
+      </p>
+
+      <h3>Cara Penggunaan:</h3>
+      <ol>
+        <li>Masukkan elemen array pertama di kolom input "Array Pertama".</li>
+        <li>Masukkan elemen array kedua di kolom input "Array Kedua".</li>
+        <li>Klik tombol "Bandingkan Array".</li>
+        <li>Akan muncul alert hasil perbandingan</li>
+      </ol>
+
+      <form action="">
+        <label for="arr1">Array Pertama</label>
+        <input type="text" name="arr1" id="arr1" placeholder="Contoh: 1,2,3" />
+
+        <label for="arr2">Array Kedua</label>
+        <input type="text" name="arr2" id="arr2" placeholder="Contoh: 1,2,3" />
+
+        <button type="button" onclick="sameArray()">Bandingkan Array</button>
+      </form>
+    </div>
+
+    <script>
+      function sameArray() {
+        const arr1 = document.getElementById("arr1").value.split(",");
+        const arr2 = document.getElementById("arr2").value.split(",");
+
+        // cek panjang array
+        if (arr1.length !== arr2.length) {
+          return alert("Panjang array tidak sama.");
+        }
+
+        // cek elemen array
+        for (let i = 0; i < arr1.length; i++) {
+          if (arr1[i] !== arr2[i]) {
+            return alert("Elemen array tidak sama.");
+          }
+        }
+
+        return alert("Array sama.");
+      }
+    </script>
+  </body>
+</html>
