@@ -36,7 +36,8 @@ body {
   margin-bottom: 5px;
 }
 
-.logic-list form input {
+.logic-list form input,
+select {
   margin-bottom: 20px;
 }
 

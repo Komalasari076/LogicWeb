@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="logic-list">
+      <h1>Kalkulator Sederhana</h1>
+      <p>
+        Gunakan kalkulator ini untuk melakukan operasi matematika sederhana
+        seperti penjumlahan, pengurangan, perkalian, dan pembagian pada
+        sekumpulan angka.
+      </p>
+
+      <h3>Cara Penggunaan:</h3>
+      <ol>
+        <li>Masukkan angka dipisahkan dengan koma (contoh: 1,2,3)</li>
+        <li>Pilih operasi yang ingin dilakukan</li>
+        <li>Klik tombol "Hitung"</li>
+      </ol>
+
+      <form id="calculate-form">
+        <label for="angka">Masukan angka</label>
+        <input type="text" id="angka" placeholder="Contoh: 1,2,3" />
+
+        <label for="operasi">Pilih operasi</label>
+        <select id="operasi">
+          <option value="penjumlahan">penjumlahan</option>
+          <option value="pengurangan">pengurangan</option>
+          <option value="perkalian">perkalian</option>
+          <option value="pembagian">pembagian</option>
+        </select>
+
+        <button type="submit">Hitung</button>
+
+        <p id="Hasil"></p>
+      </form>
+    </div>
+
+    <script>
+      function isiArrayPertambahan(arr) {
+        return arr.reduce((sum, num) => sum + num, 0);
+      }
+
+      function isiArrayPengurangan(arr) {
+        return arr.reduce((sum, num) => sum - num);
+      }
+
+      function isiArrayPerkalian(arr) {
+        return arr.reduce((sum, num) => sum * num, 1);
+      }
+
+      function isiArrayPembagian(arr) {
+        return arr.reduce((sum, num) => sum / num);
+      }
+
+      document
+        .getElementById("calculate-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const input = document.getElementById("angka").value;
+          const operasi = document.getElementById("operasi").value;
+          const hasil = document.getElementById("Hasil");
+
+          const angka = input.split("").map(Number);
+
+          // Jalankan operasi yang sesuai
+          let hasilHitung;
+          switch (operasi) {
+            case "penjumlahan":
+              hasilHitung = isiArrayPertambahan(angka);
+              break;
+            case "pengurangan":
+              hasilHitung = isiArrayPengurangan(angka);
+              break;
+            case "perkalian":
+              hasilHitung = isiArrayPerkalian(angka);
+              break;
+            case "pembagian":
+              hasilHitung = isiArrayPembagian(angka);
+              break;
+            default:
+              hasilHitung = "Operasi tidak valid!";
+          }
+
+          hasil.textContent = `Hasil: ${hasilHitung} `;
+        });
+    </script>
+  </body>
+</html>
