@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <title>Menghitung karakter</title>
+  </head>
+  <body>
+    <div class="logic-list">
+      <h1>Menghitung Karakter</h1>
+      <p>
+        Masukkan sebuah text, dan sistem akan menghitung jumlah kemunculan
+        setiap karakter di dalam text tersebut.
+      </p>
+
+      <h3>Cara Penggunaan:</h3>
+      <ol>
+        <li>Masukkan teks pada kolom input</li>
+        <li>Klik tombol Hitung Karakter.</li>
+        <li>Pesan alert akan muncul dengan hasil perhitungan karakter.</li>
+      </ol>
+
+      <form action="">
+        <label for="char">Masukkan Teks</label>
+        <input type="text" for="char" id="char" placeholder="Contoh: helloo" />
+
+        <button type="button" onclick="menghitungKarakter(event)">
+          Hitung Karakter
+        </button>
+      </form>
+    </div>
+
+    <script>
+      function menghitungKarakter(e) {
+        e.preventDefault();
+        let input = document.getElementById("char").value;
+        let karakter = {};
+
+        input.split("").forEach((char) => {
+          //split(""), Membagi string menjadi misalnya "helloo" menjadi ["h", "e", "l", "l", "o", "o"]
+          if (karakter.hasOwnProperty(char)) {
+            // Jika sudah ada, tambahkan 1; jika belum, inisialisasi menjadi 1.
+            karakter[char] += 1;
+          } else {
+            karakter[char] = 1;
+          }
+        });
+
+        // Konversi hasil ke string untuk ditampilkan di alert
+        let hasil = "Hasil perhitungan karakter \n";
+        for (const [char, count] of Object.entries(karakter)) {
+          hasil += `${char} : ${count}\n`;
+        }
+
+        alert(hasil);
+      }
+    </script>
+  </body>
+</html>

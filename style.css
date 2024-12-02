@@ -21,25 +21,25 @@ body {
   background-color: rgb(187, 187, 187);
 }
 
-.same-array {
+.logic-list {
   width: 60%;
   margin: auto;
   padding: 10px;
 }
 
-.same-array form {
+.logic-list form {
   display: flex;
   flex-direction: column;
 }
 
-.same-array form label {
+.logic-list form label {
   margin-bottom: 5px;
 }
 
-.same-array form input {
+.logic-list form input {
   margin-bottom: 20px;
 }
 
-.same-array form button {
-  margin: 10px 0;
+.logic-list form button {
+  margin: 8px 0;
 }
