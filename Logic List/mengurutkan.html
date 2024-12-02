@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="logic-list">
+      <h1>Mengurutkan Angka</h1>
+      <p>
+        Program sederhana untuk mengurutkan angka secara otomatis. Masukkan
+        angka, dan hasil urutan akan ditampilkan dalam bentuk nontifikasi
+        (alert).
+      </p>
+
+      <ol>
+        <li>Masukkan angka yang ingin diurutkan ke dalam kolom input</li>
+        <li>Klik tombol Urutkan Angka</li>
+        <li>Hasil urutan angka akan muncul pada alert</li>
+      </ol>
+
+      <form action="">
+        <label for="number">Masukan Angka</label>
+        <input type="text" name="number" id="number" />
+
+        <button type="button" onclick="urutkanNumber(event)">
+          Urutkan Number
+        </button>
+        <p id="hasil"></p>
+      </form>
+    </div>
+
+    <script>
+      function urutkanNumber(e) {
+        e.preventDefault();
+        let input = document.getElementById("number").value;
+        let arr = input.split("").map(Number);
+
+        arr.sort((a, b) => a - b);
+        alert(arr);
+      }
+    </script>
+  </body>
+</html>
