@@ -8,6 +8,11 @@
   </head>
   <body>
     <div class="logic-list">
+      <div class="nav">
+        <a href="../index.html"><span>&#x2302;</span> Home</a>
+        <a>Page 5/5 <span>&#x25A1;</span></a>
+      </div>
+
       <h1>Kalkulator Sederhana</h1>
       <p>
         Gunakan kalkulator ini untuk melakukan operasi matematika sederhana
@@ -17,9 +22,10 @@
 
       <h3>Cara Penggunaan:</h3>
       <ol>
-        <li>Masukkan angka dipisahkan dengan koma (contoh: 1,2,3)</li>
+        <li>Masukkan angka ke dalam input</li>
         <li>Pilih operasi yang ingin dilakukan</li>
         <li>Klik tombol "Hitung"</li>
+        <li>Akan muncul alert hasil perhitungan</li>
       </ol>
 
       <form id="calculate-form">
@@ -35,9 +41,23 @@
         </select>
 
         <button type="submit">Hitung</button>
-
-        <p id="Hasil"></p>
       </form>
+
+      <div class="prev-next">
+        <div class="prev-container">
+          <button class="action-button">
+            <a href="mengurutkan.html">&lt;&lt;&lt; Prev</a>
+          </button>
+          <p class="prev">Mengurutkan Angka</p>
+        </div>
+
+        <div class="next-container">
+          <button class="action-button">
+            <a href="perbandingan.html">Next &gt;&gt;&gt;</a>
+          </button>
+          <p class="next">Bandingkan Array</p>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -62,11 +82,28 @@
         .addEventListener("submit", function (e) {
           e.preventDefault();
 
-          const input = document.getElementById("angka").value;
+          const input = document.getElementById("angka").value.trim();
           const operasi = document.getElementById("operasi").value;
-          const hasil = document.getElementById("Hasil");
 
-          const angka = input.split("").map(Number);
+          if (input.length === 0) {
+            return alert("input tidak boleh kosong");
+          }
+
+          // Cek apakah input tidak memiliki pemisah (spasi, koma, titik)
+          if (/^\d+$/.test(input)) {
+            return alert(
+              "Mohon gunakan pemisah seperti koma, spasi, atau titik antara angka!"
+            );
+          }
+
+          const angka = input
+            .replace(/[.,\s]+/g, ",")
+            .split(",")
+            .map(Number);
+
+          if (angka.some(isNaN)) {
+            return alert("Mohon masukkan angka yang valid!");
+          }
 
           // Jalankan operasi yang sesuai
           let hasilHitung;
@@ -87,7 +124,9 @@
               hasilHitung = "Operasi tidak valid!";
           }
 
-          hasil.textContent = `Hasil: ${hasilHitung} `;
+          alert(
+            `Hasil ${operasi}:\n ${hasilHitung} \n\nCatatan: untuk angka ribuan, tulis tanpa menggunakan pemisah seperti titik atau koma.`
+          );
         });
     </script>
   </body>

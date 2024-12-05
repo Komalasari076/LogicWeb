@@ -5,9 +5,9 @@
 
 body {
   width: 40%;
+  height: 100%;
   margin: auto;
   padding: 20px 0;
-  background: rgb(243, 243, 243);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -20,14 +20,20 @@ p {
   flex-direction: column;
 }
 
+.list a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
 .list li {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #f9f9f9;
   margin-top: 10px;
-  padding: 0 15px;
+  padding: 0 10px;
+  background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 5px;
   transition: transform 0.2s ease, background-color 0.2s ease;
@@ -35,47 +41,169 @@ p {
 
 .list li:hover {
   transform: scale(1.02);
-  background-color: #e8f5e9;
-}
-
-.list a {
-  text-decoration: none;
-  color: #2c3e50;
-  font-weight: bold;
-}
-
-.list a:hover {
-  color: #16a085;
+  background-color: #dbeafe;
+  border: 1px solid #bfdbfe;
 }
 
 .list span {
-  font-size: 20px;
+  font-size: 28px;
   color: #999;
 }
 
 .list li:hover span {
-  color: #16a085;
+  color: #2c3e50;
 }
 
-.logic-list {
-  margin: auto;
-  padding: 10px;
+/* !Logic List */
+.logic-list .nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.logic-list .nav a {
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #2c3e50;
+}
+
+.logic-list .nav a span {
+  font-size: 30px;
+}
+
+.logic-list li {
+  margin: 2px 0 2px 20px;
 }
 
 .logic-list form {
   display: flex;
   flex-direction: column;
+  margin: 20px 0;
 }
 
 .logic-list form label {
   margin-bottom: 5px;
+  font-weight: 500;
 }
 
 .logic-list form input,
 select {
   margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 .logic-list form button {
   margin: 8px 0;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: font-weight 0.2s ease, background-color 0.2s ease;
+}
+
+.logic-list form button:hover {
+  background-color: #dfdfdf;
+  border: 1px solid #cfcfcf;
+  font-weight: 600;
+}
+
+/*! Tongle */
+.toogle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.toggle-btn {
+  margin: 10px 0;
+  padding: 2px;
+  border: none;
+  cursor: pointer;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+.toggle-btn.active {
+  border-bottom: 2px solid #8b8b8b;
+  font-weight: 600;
+}
+
+/*! Button prev and next */
+.prev-next {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.prev-container,
+.next-container {
+  position: relative;
+}
+
+.action-button {
+  padding: 4px 10px;
+  border: 1px solid #cfcfcf;
+  border-radius: 5px;
+}
+
+.action-button:hover {
+  background-color: #dbeafe;
+  border: 1px solid #bfdbfe;
+}
+
+.action-button a {
+  text-decoration: none;
+  color: #2c3e50;
+}
+
+.action-button a:hover {
+  font-weight: bold;
+}
+
+.next,
+.prev {
+  opacity: 0;
+  position: absolute;
+  top: -120%;
+  transform: translateY(100%);
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.prev {
+  left: 100%;
+  margin-left: 10px;
+}
+
+.next {
+  right: 100%;
+  margin-right: 10px;
+}
+
+/* Saat tombol ditekan, teks muncul */
+.action-button:hover + .prev,
+.action-button:hover + .next {
+  opacity: 1;
+  color: #8b8b8b;
+}
+
+/* Media Query untuk layar sedang (tablet) */
+@media (max-width: 768px) {
+  body {
+    width: 60%;
+  }
+}
+
+/* Media Query untuk layar kecil (ponsel) */
+@media (max-width: 480px) {
+  body {
+    width: 90%;
+  }
 }

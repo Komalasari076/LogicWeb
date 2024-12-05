@@ -8,44 +8,156 @@
   </head>
   <body>
     <div class="logic-list">
+      <div class="nav">
+        <a href="../index.html"><span>&#x2302;</span> Home</a>
+        <a>Page 2/5 <span>&#x25A1;</span></a>
+      </div>
+
       <h1>Menghitung Karakter</h1>
       <p>
-        Masukkan sebuah text, dan sistem akan menghitung jumlah kemunculan
-        setiap karakter di dalam text tersebut.
+        Masukkan teks ke dalam kolom input, dan sistem akan secara otomatis
+        menghitung jumlah kemunculan setiap karakter di dalam teks tersebut.
       </p>
 
-      <h3>Cara Penggunaan:</h3>
-      <ol>
-        <li>Masukkan teks pada kolom input</li>
-        <li>Klik tombol Hitung Karakter.</li>
-        <li>Pesan alert akan muncul dengan hasil perhitungan karakter.</li>
-      </ol>
-
-      <form action="">
-        <label for="char">Masukkan Teks</label>
-        <input type="text" for="char" id="char" placeholder="Contoh: helloo" />
-
-        <button type="button" onclick="menghitungKarakter(event)">
-          Hitung Karakter
+      <!-- Toggle Buttons -->
+      <div class="toogle">
+        <button
+          id="single-btn"
+          class="toggle-btn active"
+          onclick="toggleForm('single')"
+        >
+          Input Tunggal
         </button>
-      </form>
+        <button
+          id="multiple-btn"
+          class="toggle-btn"
+          onclick="toggleForm('multiple')"
+        >
+          Input Ganda
+        </button>
+      </div>
+
+      <!-- Input tunggal -->
+      <div id="single-input" style="display: block">
+        <h3>Cara Penggunaan:</h3>
+        <ol>
+          <li>Masukkan teks ke dalam kolom input</li>
+          <li>Klik tombol Hitung Karakter</li>
+          <li>Akan muncul alert hasil perhitungan karakter</li>
+        </ol>
+        <form action="">
+          <label for="char">Masukkan Teks</label>
+          <input type="text" id="char" placeholder="Contoh: hello world" />
+          <button type="button" onclick="menghitungKarakter(event, 'single')">
+            Hitung Karakter
+          </button>
+        </form>
+      </div>
+
+      <!-- Input ganda -->
+      <div id="multiple-input" style="display: none">
+        <h3>Cara Penggunaan:</h3>
+        <ol>
+          <li>Masukkan teks ke dalam kolom input Text Pertama</li>
+          <li>Masukkan teks ke dalam kolom input Text Kedua</li>
+          <li>Klik tombol Hitung Karakter</li>
+          <li>Akan muncul alert hasil perhitungan karakter</li>
+        </ol>
+        <form action="">
+          <label for="chars">Masukkan Text Pertama</label>
+          <input type="text" id="char1" placeholder="Contoh: hello" />
+
+          <label for="chars">Masukkan Text Kedua</label>
+          <input type="text" id="char2" placeholder="Contoh: world" />
+
+          <button type="button" onclick="menghitungKarakter(event, 'multiple')">
+            Hitung Karakter
+          </button>
+        </form>
+      </div>
+
+      <div class="prev-next">
+        <div class="prev-container">
+          <button class="action-button">
+            <a href="perbandingan.html">&lt;&lt;&lt; Prev</a>
+          </button>
+          <p class="prev">Perbandingan Array</p>
+        </div>
+
+        <div class="next-container">
+          <button class="action-button">
+            <a href="duplikasi.html">Next &gt;&gt;&gt;</a>
+          </button>
+          <p class="next">Hapus Duplikat</p>
+        </div>
+      </div>
     </div>
 
     <script>
-      function menghitungKarakter(e) {
+      function toggleForm(type) {
+        document.getElementById("single-input").style.display =
+          type == "single" ? "block" : "none";
+        document.getElementById("multiple-input").style.display =
+          type == "multiple" ? "block" : "none";
+
+        if (type == "single") {
+          document.getElementById("single-btn").classList.add("active");
+          document.getElementById("multiple-btn").classList.remove("active");
+        } else {
+          document.getElementById("single-btn").classList.remove("active");
+          document.getElementById("multiple-btn").classList.add("active");
+        }
+      }
+
+      function menghitungKarakter(e, mode) {
         e.preventDefault();
-        let input = document.getElementById("char").value;
         let karakter = {};
 
-        input.split("").forEach((char) => {
-          //split(""), Membagi string menjadi misalnya "helloo" menjadi ["h", "e", "l", "l", "o", "o"]
-          if (karakter.hasOwnProperty(char)) {
-            // Jika sudah ada, tambahkan 1; jika belum, inisialisasi menjadi 1.
-            karakter[char] += 1;
-          } else {
-            karakter[char] = 1;
+        if (mode === "single") {
+          let input = document
+            .getElementById("char")
+            .value.replace(/\s+/g, "")
+            .split("");
+
+          if (input.length === 0) {
+            alert("input tidak boleh kosong");
+            return;
           }
-        });
+
+          input.forEach((char) => {
+            // Jika sudah ada, tambahkan 1; jika belum, inisialisasi menjadi 1.
+            if (karakter.hasOwnProperty(char)) {
+              karakter[char] += 1;
+            } else {
+              karakter[char] = 1;
+            }
+          });
+        } else if (mode === "multiple") {
+          let input1 = document
+            .getElementById("char1")
+            .value.replace(/\s+/g, "")
+            .split("");
+          let input2 = document
+            .getElementById("char2")
+            .value.replace(/\s+/g, "")
+            .split("");
+
+          if (input1.length === 0 || input2.length === 0) {
+            alert("Kedua input tidak boleh kosong");
+            return;
+          }
+
+          let inputs = [...input1, ...input2];
+
+          inputs.forEach((char) => {
+            // Jika sudah ada, tambahkan 1; jika belum, inisialisasi menjadi 1.
+            if (karakter.hasOwnProperty(char)) {
+              karakter[char] += 1;
+            } else {
+              karakter[char] = 1;
+            }
+          });
+        }
 
         // Konversi hasil ke string untuk ditampilkan di alert
         let hasil = "Hasil perhitungan karakter \n";

@@ -8,46 +8,161 @@
   </head>
   <body>
     <div class="logic-list">
+      <div class="nav">
+        <a href="../index.html"><span>&#x2302;</span> Home</a>
+        <a>Page 3/5 <span>&#x25A1;</span></a>
+      </div>
+
       <h1>Hapus Elemen Duplikat</h1>
       <p>
-        Hapus elemen yang sama dalam daftar dengan mudah. Cukup masukkan angka
-        atau huruf di kolom input, klik tombol, dan hasilnya akan langsung
-        ditampilkan.
+        Pilih mode input tunggal atau ganda, masukkan daftar angka atau huruf,
+        dan sistem akan secara otomatis menghapus elemen yang duplikat.
       </p>
-      <ol>
-        <li>masukan angka atau huruf di kolom input</li>
-        <li>klik Hapus Duplikat</li>
-        <li>Hasil akan muncul dalam bentuk nontifikasi(alert)</li>
-      </ol>
 
-      <form action="">
-        <label for="array">Masukan angka atau huruf</label>
-        <input
-          type="text"
-          name="array"
-          id="array"
-          placeholder="contoh: Nomor 1234531123"
-        />
-
-        <button type="button" onclick="hapusDuplikat(event)">
-          Hapus Duplikat
+      <!-- Toggle Buttons -->
+      <div class="toogle">
+        <button
+          id="single-btn"
+          class="toggle-btn active"
+          onclick="toggleForm('single')"
+        >
+          Input Tunggal
         </button>
-      </form>
+        <button
+          id="multiple-btn"
+          class="toggle-btn"
+          onclick="toggleForm('multiple')"
+        >
+          Input Ganda
+        </button>
+      </div>
+
+      <!-- Input Tunggal -->
+      <div id="single-input" style="display: block">
+        <h3>Cara Penggunaan:</h3>
+        <ol>
+          <li>Masukkan angka atau huruf di kolom input</li>
+          <li>Klik Hapus Duplikat</li>
+          <li>Akan muncul alert hasil elemen tanpa duplikat</li>
+        </ol>
+
+        <form action="">
+          <label for="array">Masukkan Angka Atau Huruf</label>
+          <input
+            type="text"
+            name="array"
+            id="array"
+            placeholder="contoh: abc123aa"
+          />
+          <button type="button" onclick="hapusDuplikat(event, 'single')">
+            Hapus Duplikat
+          </button>
+        </form>
+      </div>
+
+      <!-- Input Ganda -->
+      <div id="multiple-input" style="display: none">
+        <h3>Cara Penggunaan:</h3>
+        <ol>
+          <li>Masukkan angka atau huruf di kolom input pertama</li>
+          <li>Masukkan angka atau huruf di kolom input kedua</li>
+          <li>Klik Hapus Duplikat</li>
+          <li>Akan muncul alert hasil elemen tanpa duplikat</li>
+        </ol>
+
+        <form action="">
+          <label for="array1">Angka Atau Huruf Pertama</label>
+          <input
+            type="text"
+            name="array1"
+            id="array1"
+            placeholder="contoh: abc123"
+          />
+          <label for="array2">Angka Atau Huruf Kedua</label>
+          <input
+            type="text"
+            name="array2"
+            id="array2"
+            placeholder="contoh: abc123"
+          />
+          <button type="button" onclick="hapusDuplikat(event, 'multiple')">
+            Hapus Duplikat
+          </button>
+        </form>
+      </div>
+
+      <div class="prev-next">
+        <div class="prev-container">
+          <button class="action-button">
+            <a href="menghitung.html">&lt;&lt;&lt; Prev</a>
+          </button>
+          <p class="prev">Menghitung Karakter</p>
+        </div>
+
+        <div class="next-container">
+          <button class="action-button">
+            <a href="mengurutkan.html">Next &gt;&gt;&gt;</a>
+          </button>
+          <p class="next">Mengurutkan Angka</p>
+        </div>
+      </div>
     </div>
 
     <script>
-      function hapusDuplikat(e) {
-        e.preventDefault();
-        let arr = document.getElementById("array").value;
-        const arrBaru = [];
+      function toggleForm(type) {
+        document.getElementById("single-input").style.display =
+          type == "single" ? "block" : "none";
+        document.getElementById("multiple-input").style.display =
+          type == "multiple" ? "block" : "none";
 
-        for (i = 0; i < arr.length; i++) {
-          if (!arrBaru.includes(arr[i])) {
-            arrBaru.push(arr[i]);
+        if (type == "single") {
+          document.getElementById("single-btn").classList.add("active");
+          document.getElementById("multiple-btn").classList.remove("active");
+        } else {
+          document.getElementById("single-btn").classList.remove("active");
+          document.getElementById("multiple-btn").classList.add("active");
+        }
+      }
+
+      function hapusDuplikat(e, mode) {
+        e.preventDefault();
+        let arrBaru = [];
+
+        if (mode === "single") {
+          let arr = document
+            .getElementById("array")
+            .value.replace(/[.,\s+]/g, "");
+
+          if (arr.length === 0) {
+            return alert("Input tidak boleh kosong.");
           }
+
+          arr.split("").forEach((char) => {
+            if (!arrBaru.includes(char)) {
+              arrBaru.push(char);
+            }
+          });
+        } else if (mode === "multiple") {
+          let arr1 = document
+            .getElementById("array1")
+            .value.replace(/[.,\s+]/g, "");
+          let arr2 = document
+            .getElementById("array2")
+            .value.replace(/[.,\s+]/g, "");
+
+          if (arr1.length === 0 || arr2.length === 0) {
+            return alert("Kedua input tidak boleh kosong.");
+          }
+
+          let combined = [...arr1, ...arr2];
+          combined.forEach((char) => {
+            if (!arrBaru.includes(char)) {
+              arrBaru.push(char);
+            }
+          });
         }
 
-        return alert(arrBaru);
+        alert(`Hasil setelah menghapus duplikat:\n ${arrBaru.join(", ")}`);
       }
     </script>
   </body>

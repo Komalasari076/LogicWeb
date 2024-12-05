@@ -4,42 +4,176 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style.css" />
-    <title>Document</title>
+    <title>Mengurutkan Angka</title>
   </head>
   <body>
     <div class="logic-list">
+      <div class="nav">
+        <a href="../index.html"><span>&#x2302;</span> Home</a>
+        <a>Page 4/5 <span>&#x25A1;</span></a>
+      </div>
+
       <h1>Mengurutkan Angka</h1>
       <p>
-        Program sederhana untuk mengurutkan angka secara otomatis. Masukkan
-        angka, dan hasil urutan akan ditampilkan dalam bentuk nontifikasi
-        (alert).
+        Pilih mode input tunggal atau ganda, masukkan angka-angka, dan program
+        akan mengurutkan angka secara otomatis.
       </p>
 
-      <ol>
-        <li>Masukkan angka yang ingin diurutkan ke dalam kolom input</li>
-        <li>Klik tombol Urutkan Angka</li>
-        <li>Hasil urutan angka akan muncul pada alert</li>
-      </ol>
-
-      <form action="">
-        <label for="number">Masukan Angka</label>
-        <input type="text" name="number" id="number" />
-
-        <button type="button" onclick="urutkanNumber(event)">
-          Urutkan Number
+      <!-- Toggle Buttons -->
+      <div class="toogle">
+        <button
+          id="single-btn"
+          class="toggle-btn active"
+          onclick="toggleForm('single')"
+        >
+          Input Tunggal
         </button>
-        <p id="hasil"></p>
-      </form>
+        <button
+          id="multiple-btn"
+          class="toggle-btn"
+          onclick="toggleForm('multiple')"
+        >
+          Input Ganda
+        </button>
+      </div>
+
+      <!-- Input Tunggal -->
+      <div id="single-input">
+        <h3>Cara Penggunaan:</h3>
+
+        <ol>
+          <li>Masukkan angka ke dalam kolom input.</li>
+          <li>Klik tombol "Urutkan Angka".</li>
+          <li>Hasil urutan angka akan muncul pada alert.</li>
+        </ol>
+
+        <form>
+          <label for="number">Masukkan Angka</label>
+          <input type="text" id="number" placeholder="contoh: 5,4,3,2,1" />
+
+          <button type="button" onclick="urutkanNumber('single')">
+            Urutkan Angka
+          </button>
+        </form>
+      </div>
+
+      <!-- Input Ganda -->
+      <div id="multiple-input" style="display: none">
+        <h3>Cara Penggunaan:</h3>
+
+        <ol>
+          <li>Masukkan angka ke dalam kolom input "Angka Pertama".</li>
+          <li>Masukkan angka ke dalam kolom input "Angka Kedua".</li>
+          <li>Klik tombol "Urutkan Angka".</li>
+          <li>Hasil gabungan urutan angka akan muncul pada alert.</li>
+        </ol>
+
+        <form>
+          <label for="number1">Masukkan Angka Pertama</label>
+          <input type="text" id="number1" placeholder="contoh: 5,4,3,2,1" />
+
+          <label for="number2">Masukkan Angka Kedua</label>
+          <input type="text" id="number2" placeholder="contoh: 9,8,7,6,3" />
+
+          <button type="button" onclick="urutkanNumber('multiple')">
+            Urutkan Angka
+          </button>
+        </form>
+      </div>
+
+      <div class="prev-next">
+        <div class="prev-container">
+          <button class="action-button">
+            <a href="duplikasi.html">&lt;&lt;&lt; Prev</a>
+          </button>
+          <p class="prev">Hapus Duplikat</p>
+        </div>
+
+        <div class="next-container">
+          <button class="action-button">
+            <a href="aritmetika.html">Next &gt;&gt;&gt;</a>
+          </button>
+          <p class="next">Kalkulator Sederhana</p>
+        </div>
+      </div>
     </div>
 
     <script>
-      function urutkanNumber(e) {
-        e.preventDefault();
-        let input = document.getElementById("number").value;
-        let arr = input.split("").map(Number);
+      function toggleForm(type) {
+        document.getElementById("single-input").style.display =
+          type == "single" ? "block" : "none";
+        document.getElementById("multiple-input").style.display =
+          type == "multiple" ? "block" : "none";
 
-        arr.sort((a, b) => a - b);
-        alert(arr);
+        if (type == "single") {
+          document.getElementById("single-btn").classList.add("active");
+          document.getElementById("multiple-btn").classList.remove("active");
+        } else {
+          document.getElementById("single-btn").classList.remove("active");
+          document.getElementById("multiple-btn").classList.add("active");
+        }
+      }
+
+      function urutkanNumber(mode) {
+        if (mode === "single") {
+          const input = document.getElementById("number").value.trim();
+
+          if (input.length === 0) {
+            return alert("input tidak boleh kosong");
+          }
+
+          // Cek apakah input tidak memiliki pemisah (spasi, koma, titik)
+          if (/^\d+$/.test(input)) {
+            return alert(
+              "Mohon gunakan pemisah seperti koma, spasi, atau titik antara angka!"
+            );
+          }
+
+          const arr = input
+            .replace(/[.,\s]+/g, ",")
+            .split(",")
+            .map(Number);
+
+          if (arr.some(isNaN)) {
+            return alert("Mohon masukkan angka yang valid!");
+          }
+
+          arr.sort((a, b) => a - b);
+          alert(`Hasil urutan angka:\n ${arr.join(", ")}`);
+        } else if (mode === "multiple") {
+          const input1 = document.getElementById("number1").value.trim();
+          const input2 = document.getElementById("number2").value.trim();
+
+          if (input1.length === 0 || input2.length === 0) {
+            return alert("Kedua input tidak boleh kosong");
+          }
+
+          // Cek apakah input tidak memiliki pemisah (spasi, koma, titik)
+          if (/^\d+$/.test(input1, input2)) {
+            return alert(
+              "Mohon gunakan pemisah seperti koma, spasi, atau titik antara angka!"
+            );
+          }
+
+          const arr = [
+            ...input1
+              .replace(/[.,\s]+/g, ",")
+              .split(",")
+              .map(Number),
+            ...input2
+              .replace(/[.,\s]+/g, ",")
+              .split(",")
+              .map(Number),
+          ];
+
+          if (arr.some(isNaN)) {
+            alert("Mohon masukkan angka yang valid!");
+            return;
+          }
+
+          arr.sort((a, b) => a - b);
+          alert(`Hasil urutan angka:\n ${arr.join(", ")}`);
+        }
       }
     </script>
   </body>

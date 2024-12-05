@@ -8,11 +8,15 @@
   </head>
   <body>
     <div class="logic-list">
+      <div class="nav">
+        <a href="../index.html"><span>&#x2302;</span> Home</a>
+        <a>Page 1/5 <span>&#x25A1;</span></a>
+      </div>
+
       <h1>Perbandingan Array</h1>
       <p>
         Masukkan dua array untuk dibandingkan. Aplikasi ini akan memeriksa
         apakah kedua array memiliki panjang yang sama dan elemen yang sama.
-        Hasil perbandingan akan ditampilkan di konsol browser.
       </p>
 
       <h3>Cara Penggunaan:</h3>
@@ -20,24 +24,68 @@
         <li>Masukkan elemen array pertama di kolom input "Array Pertama".</li>
         <li>Masukkan elemen array kedua di kolom input "Array Kedua".</li>
         <li>Klik tombol "Bandingkan Array".</li>
-        <li>Akan muncul alert hasil perbandingan</li>
+        <li>Akan muncul alert hasil perbandingan.</li>
       </ol>
 
       <form action="">
         <label for="arr1">Array Pertama</label>
-        <input type="text" name="arr1" id="arr1" placeholder="Contoh: 1,2,3" />
+        <input
+          type="text"
+          name="arr1"
+          id="arr1"
+          placeholder="Contoh: 1,2,3,4"
+          required
+        />
 
         <label for="arr2">Array Kedua</label>
-        <input type="text" name="arr2" id="arr2" placeholder="Contoh: 1,2,3" />
+        <input
+          type="text"
+          name="arr2"
+          id="arr2"
+          placeholder="Contoh: 1,2,3,4"
+          required
+        />
 
         <button type="button" onclick="sameArray()">Bandingkan Array</button>
       </form>
+
+      <div class="prev-next">
+        <div class="prev-container">
+          <button class="action-button">
+            <a href="aritmetika.html">&lt;&lt;&lt; Prev</a>
+          </button>
+          <p class="prev">Aritmatika Dasar</p>
+        </div>
+
+        <div class="next-container">
+          <button class="action-button">
+            <a href="menghitung.html">Next &gt;&gt;&gt;</a>
+          </button>
+          <p class="next">Menghitung Karakter</p>
+        </div>
+      </div>
     </div>
 
     <script>
       function sameArray() {
-        const arr1 = document.getElementById("arr1").value.split(",");
-        const arr2 = document.getElementById("arr2").value.split(",");
+        const arr1 = document
+          .getElementById("arr1")
+          .value.split(",")
+          .map((item) => item.trim());
+        const arr2 = document
+          .getElementById("arr2")
+          .value.split(",")
+          .map((item) => item.trim());
+
+        // Cek jika input kosong
+        if (!arr1[0] || !arr2[0]) {
+          return alert("Input array tidak boleh kosong.");
+        }
+
+        // Cek jika ada elemen kosong dalam array
+        if (arr1.includes("") || arr2.includes("")) {
+          return alert("Array tidak boleh memiliki elemen kosong.");
+        }
 
         // cek panjang array
         if (arr1.length !== arr2.length) {
