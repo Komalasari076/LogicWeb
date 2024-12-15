@@ -4,11 +4,19 @@
 }
 
 body {
-  width: 40%;
+  max-width: 500px;
   height: 100%;
   margin: auto;
-  padding: 20px 0;
+  padding: 10px 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.deskripsi {
+  margin: 10px 0 20px 0;
+}
+
+h1 {
+  font-size: 26px;
 }
 
 p {
@@ -18,6 +26,7 @@ p {
 .list {
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
 .list a {
@@ -31,7 +40,6 @@ p {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
   padding: 0 10px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
@@ -59,10 +67,12 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .logic-list .nav a {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   text-decoration: none;
   color: #2c3e50;
@@ -80,6 +90,10 @@ p {
   display: flex;
   flex-direction: column;
   margin: 20px 0;
+  background-color: #fcfcfc;
+  padding: 20px;
+  box-shadow: 0 0 5px rgb(185, 185, 185);
+  border-radius: 10px;
 }
 
 .logic-list form label {
@@ -117,10 +131,10 @@ select {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 20px 0;
 }
 
 .toggle-btn {
-  margin: 10px 0;
   padding: 2px;
   border: none;
   cursor: pointer;
@@ -140,6 +154,7 @@ select {
   justify-content: space-between;
   align-items: center;
   position: relative;
+  margin-bottom: 20px;
 }
 
 .prev-container,
@@ -194,15 +209,7 @@ select {
   color: #8b8b8b;
 }
 
-/* Media Query untuk layar sedang (tablet) */
-@media (max-width: 768px) {
-  body {
-    width: 60%;
-  }
-}
-
-/* Media Query untuk layar kecil (ponsel) */
-@media (max-width: 480px) {
+@media (max-width: 540px) {
   body {
     width: 90%;
   }
