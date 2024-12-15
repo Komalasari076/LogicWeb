@@ -49,8 +49,8 @@ p {
 
 .list li:hover {
   transform: scale(1.02);
-  background-color: #dbeafe;
-  border: 1px solid #bfdbfe;
+  background-color: #e9f3ff;
+  border: 1px solid #d5e8ff;
 }
 
 .list span {
